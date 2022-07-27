@@ -104,8 +104,12 @@
             <include refid="Base_Where"/>
         </where>
         LIMIT ${r"#{page}"}, ${r"#{pageSize}"}
+        <trim prefix="limit">
+            <if test="offset != null and limit != null">
+                ${r"#{offset}"}, ${r"#{limit}"}
+            </if>
+        </trim>
     </select>
-
 
     <select id="pageListCount" resultType="java.lang.Integer">
         SELECT count(1)

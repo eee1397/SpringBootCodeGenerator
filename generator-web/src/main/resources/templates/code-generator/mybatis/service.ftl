@@ -11,26 +11,26 @@ public interface ${classInfo.className}Service {
     /**
     * 新增
     */
-    public Object insert(${classInfo.className} ${classInfo.className?uncap_first});
+    public int insert(${classInfo.className}PO ${classInfo.className?uncap_first});
 
     /**
     * 删除
     */
-    public Object delete(int id);
+    public int delete(Long id);
 
     /**
     * 更新
     */
-    public Object update(${classInfo.className} ${classInfo.className?uncap_first});
+    public int update(${classInfo.className}PO ${classInfo.className?uncap_first});
 
     /**
     * 根据主键 id 查询
     */
-    public ${classInfo.className} load(int id);
+    public ${classInfo.className}PO load(Long id);
 
     /**
     * 分页查询
     */
-    public Map<String,Object> pageList(int offset, int pagesize);
+    public Page<${classInfo.className}PO> pageList(${classInfo.className}Req req);
 
 }

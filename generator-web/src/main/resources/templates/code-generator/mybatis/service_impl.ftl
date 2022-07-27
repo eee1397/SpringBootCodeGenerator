@@ -19,50 +19,45 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
 
 
 	@Override
-	public Object insert(${classInfo.className} ${classInfo.className?uncap_first}) {
+	public int insert(${classInfo.className}PO ${classInfo.className?uncap_first}) {
 
 		// valid
 		if (${classInfo.className?uncap_first} == null) {
 			return ${returnUtilFailure}("必要参数缺失");
         }
 
-		${classInfo.className?uncap_first}Mapper.insert(${classInfo.className?uncap_first});
-        return ${returnUtilSuccess}();
+		int ret = ${classInfo.className?uncap_first}Mapper.insert(${classInfo.className?uncap_first});
+        return row;
 	}
 
 
 	@Override
-	public Object delete(int id) {
+	public int delete(Long id) {
 		int ret = ${classInfo.className?uncap_first}Mapper.delete(id);
-		return ret>0?${returnUtilSuccess}():${returnUtilFailure}();
+		return ret;
 	}
 
 
 	@Override
-	public Object update(${classInfo.className} ${classInfo.className?uncap_first}) {
+	public int update(${classInfo.className}PO ${classInfo.className?uncap_first}) {
 		int ret = ${classInfo.className?uncap_first}Mapper.update(${classInfo.className?uncap_first});
-		return ret>0?${returnUtilSuccess}():${returnUtilFailure}();
+		return ret;
 	}
 
 
 	@Override
-	public ${classInfo.className} load(int id) {
+	public ${classInfo.className}PO load(Long id) {
 		return ${classInfo.className?uncap_first}Mapper.load(id);
 	}
 
 
 	@Override
-	public Map<String,Object> pageList(int offset, int pagesize) {
+	public Page<${classInfo.className}PO> pageList(${classInfo.className}Req req) {
 
-		List<${classInfo.className}> pageList = ${classInfo.className?uncap_first}Mapper.pageList(offset, pagesize);
-		int totalCount = ${classInfo.className?uncap_first}Mapper.pageListCount(offset, pagesize);
+		List<${classInfo.className}PO> pageList = ${classInfo.className?uncap_first}Mapper.pageList(req);
+		int totalCount = ${classInfo.className?uncap_first}Mapper.pageListCount(req);
 
-		// result
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("pageList", pageList);
-		result.put("totalCount", totalCount);
-
-		return result;
+		return new Page<${classInfo.className}PO>(Long.valueOf(totalCount), pageList);
 	}
 
 }

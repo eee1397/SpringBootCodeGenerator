@@ -19,41 +19,41 @@ public interface ${classInfo.className}Mapper {
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    int insert(${classInfo.className} ${classInfo.className?uncap_first});
+    int insert(${classInfo.className}PO ${classInfo.className?uncap_first});
 
     /**
     * 刪除
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    int delete(int id);
+    int delete(Long id);
 
     /**
     * 更新
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    int update(${classInfo.className} ${classInfo.className?uncap_first});
+    int update(${classInfo.className}PO ${classInfo.className?uncap_first});
 
     /**
     * 查询 根据主键 id 查询
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    ${classInfo.className} load(int id);
+    ${classInfo.className}PO load(Long id);
 
     /**
     * 查询 分页查询
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    List<${classInfo.className}> pageList(int offset,int pagesize);
+    List<${classInfo.className}PO> pageList(${classInfo.className}Req req);
 
     /**
     * 查询 分页查询 count
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    int pageListCount(int offset,int pagesize);
+    int pageListCount(${classInfo.className}Req req);
 
 }

@@ -8,7 +8,11 @@ import java.util.List;
  * @author ${authorName}
  * @date ${.now?string('yyyy-MM-dd')}
  */
-public class ${classInfo.className} implements Serializable {
+<#if isLombok?exists && isLombok==true>
+@Data
+@NoArgsConstructor
+</#if>
+public class ${classInfo.className}PO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,19 +26,4 @@ public class ${classInfo.className} implements Serializable {
 </#list>
 </#if>
 
-<#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
-    public ${classInfo.className}() {
-    }
-
-<#list classInfo.fieldList as fieldItem>
-    public ${fieldItem.fieldClass} get${fieldItem.fieldName?cap_first}() {
-        return ${fieldItem.fieldName};
-    }
-
-    public void set${fieldItem.fieldName?cap_first}(${fieldItem.fieldClass} ${fieldItem.fieldName}) {
-        this.${fieldItem.fieldName} = ${fieldItem.fieldName};
-    }
-
-</#list>
-</#if>
 }

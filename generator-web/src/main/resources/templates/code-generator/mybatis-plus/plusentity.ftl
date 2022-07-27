@@ -16,7 +16,10 @@ import io.swagger.annotations.ApiModelProperty;</#if>
  * @author ${authorName}
  * @date ${.now?string('yyyy-MM-dd')}
  */
-<#if isLombok?exists && isLombok==true>@Data</#if><#if isSwagger?exists && isSwagger==true>
+<#if isLombok?exists && isLombok==true>
+    @Data
+    @NoArgsConstructor
+</#if><#if isSwagger?exists && isSwagger==true>
 @ApiModel("${classInfo.classComment}")</#if>
 public class ${classInfo.className} implements Serializable {
 
