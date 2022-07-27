@@ -19,6 +19,27 @@
         </#if>
     </sql>
 
+
+    <sql id="Base_Result_Map">
+        <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
+            <#list classInfo.fieldList as fieldItem >
+                ${fieldItem.columnName} AS "${fieldItem.fieldName}"<#if fieldItem_has_next>,</#if>
+            </#list>
+        </#if>
+    </sql>
+
+    <!--基础条件-->
+    <sql id="Base_Where">
+        <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
+            <#list classInfo.fieldList as fieldItem >
+                <if test="${fieldItem.fieldName} != null ">
+                    AND
+                    ${fieldItem.columnName} = ${r"#{"}${fieldItem.fieldName}${r"}"}
+                </if>
+            </#list>
+        </#if>
+    </sql>
+
     <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="${packageName}.entity.${classInfo.className}">
         INSERT INTO ${classInfo.originTableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -78,12 +99,20 @@
     <select id="pageList" resultMap="BaseResultMap">
         SELECT <include refid="Base_Column_List" />
         FROM ${classInfo.originTableName}
-        LIMIT ${r"#{offset}"}, ${r"#{pageSize}"}
+        <where>
+            1 = 1
+            <include refid="Base_Where"/>
+        </where>
+        LIMIT ${r"#{page}"}, ${r"#{pageSize}"}
     </select>
+
 
     <select id="pageListCount" resultType="java.lang.Integer">
         SELECT count(1)
         FROM ${classInfo.originTableName}
+        <where>
+            <include refid="Base_Where"/>
+        </where>
     </select>
 
 </mapper>
